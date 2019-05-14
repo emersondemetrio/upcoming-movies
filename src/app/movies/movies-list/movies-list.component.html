@@ -1,0 +1,20 @@
+<div
+	class="container"
+	fxFlex="100"
+	fxLayout="column"
+	fxFlex.lt-md="100"
+	*ngIf="!isLoading"
+	fxLayoutAlign.lt-md="space-between center">
+
+	<div fxFlexFill fxLayout="row" class="header-container" fxLayoutAlign="space-between center">
+		<h2>Movies</h2>
+	</div>
+
+	<div fxFlexFill>
+		<pre><code>{{ movies | json }}</code></pre>
+	</div>
+</div>
+
+<div class="p10" *ngIf="isLoading" fxFlex fxLayout="column" fxLayoutAlign="center start">
+	{{ feedbackMessage || "Loading, please, wait." }}
+</div>
