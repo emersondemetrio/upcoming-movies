@@ -1,39 +1,34 @@
 const express = require('express');
 const router = express.Router();
-const moment = require('moment');
+const api = require('./api');
 
-const credentials = {
-	tmdbApiKey: process.env.tmdbApiKey
-};
-
-// List all Movies
-router.get('/list', async (_req, res) => {
-	const list = [{
-		name: 'Spider Man 3'
-	}]//await api.list();
-	res.json(list);
+// List all Upcoming Movies
+router.get('/upcoming', async (_req, res) => {
+	try {
+		const list = await api.upcoming();
+		res.json(list);
+	} catch (error) {
+		res.json({
+			error
+		});
+	}
 });
 
-// Find Movies that are not deleted
-router.get('/find', async (_req, res) => {
-	const result = await api.find();
-	res.json(result.docs);
-});
-
-// Create Purchase
+// Search Movie
 router.post('/search', async (req, res) => {
 	const search = req.body.search;
-
 	res.json({
-		purchase,
-		timeUntilZero
+		search,
+		'error': 'NOT AVAILABLE YET'
 	});
 });
 
 // Get movie
 router.get('/:id', async (req, res) => {
-	const response = await api.get(req.params.id);
-	res.json(response);
+	res.json({
+		'id': req.params.id,
+		'error': 'NOT AVAILABLE YET'
+	});
 });
 
 module.exports = router;
