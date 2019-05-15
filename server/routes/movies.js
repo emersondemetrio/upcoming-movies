@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const moment = require('moment');
 
-const api = require('../api');
+const credentials = {
+	tmdbApiKey: process.env.tmdbApiKey
+};
 
 // List all Movies
 router.get('/list', async (_req, res) => {
