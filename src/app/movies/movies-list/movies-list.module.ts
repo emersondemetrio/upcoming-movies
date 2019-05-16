@@ -16,6 +16,7 @@ import {
 	MatSnackBarModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { PipesModule } from 'src/app/common/pipes/pipes.module';
 
 @NgModule({
 	imports: [
@@ -32,7 +33,8 @@ import { RouterModule } from '@angular/router';
 		MatMenuModule,
 		FlexLayoutModule,
 		RouterModule,
-		MatSnackBarModule
+		MatSnackBarModule,
+		PipesModule
 	],
 	exports: [
 		MoviesListComponent

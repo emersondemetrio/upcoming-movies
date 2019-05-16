@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MoviesService } from 'src/app/services/movies.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { Utils } from 'src/app/common/utils';
 
 @Component({
 	selector: 'app-movies-list',
@@ -12,6 +13,7 @@ export class MoviesListComponent implements OnInit {
 
 	public isLoading = false;
 	public feedbackMessage = '';
+	public pageInfo: PagedResponse = null;
 
 	constructor(
 		private movieService: MoviesService,
@@ -19,14 +21,17 @@ export class MoviesListComponent implements OnInit {
 		private snackBar: MatSnackBar) {
 	}
 
-	movies: Movie[] = [];
-
 	public getmovies() {
+		this.isLoading = true;
 		this
 			.movieService
 			.list()
 			.subscribe(resp => {
-				this.movies = resp;
+				this.pageInfo = {
+					...resp,
+					results: Utils.mapImages(resp.results),
+				};
+
 				this.isLoading = false;
 			}, () => {
 				this.notify('An error has occurred. Please, try again later', 0);

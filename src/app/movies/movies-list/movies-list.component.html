@@ -1,34 +1,49 @@
-<div class="container" fxFlex="100" fxLayout="column" fxFlex.lt-md="100" *ngIf="!isLoading"
+<div
+	class="container"
+	fxFlex="100"
+	fxLayout="column"
+	fxFlex.lt-md="100"
+	*ngIf="!isLoading"
 	fxLayoutAlign.lt-md="space-between center">
 
-	<div fxFlexFill fxLayout="row" class="header-container" fxLayoutAlign="space-between center">
+	<div
+		fxFlexFill
+		fxLayout="row"
+		class="header-container"
+		fxLayoutAlign="space-between center">
 		<h2>Movies</h2>
 	</div>
 
-	<!-- <div fxFlexFill>
-		<div *ngFor="let movie of movies">
-			<pre><code>{{ movie | json }}</code></pre>
+	<div fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="space-around center" fxFlexFill>
+		<div *ngFor="let movie of pageInfo.results">
+			<div class="one" fxflexfill="" fxlayoutalign="center center">
+				<mat-card class="movie-card" style="width: 240px">
+					<mat-card-header fxLayoutAlign="space-around center">
+						<mat-card-title fxLayoutAlign="space-around center">
+							{{ movie.original_title }}
+						</mat-card-title>
+					</mat-card-header>
+
+					<img
+						mat-card-image
+						src="{{ movie.cover }}"
+						alt="{{ movie.original_title }}">
+					<mat-card-content>
+						<p>
+							{{ movie.overview | excerpt:65 }}
+						</p>
+					</mat-card-content>
+
+					<mat-card-actions fxLayoutAlign="space-around center">
+						<button mat-button (click)="navigate(['movies', movie.id])">
+							View Details
+						</button>
+					</mat-card-actions>
+				</mat-card>
+			</div>
 		</div>
-	</div> -->
+	</div>
 </div>
-<mat-card class="example-card" style="with: 340px">
-	<mat-card-header>
-		<div mat-card-avatar class="example-header-image"></div>
-		<mat-card-title>Shiba Inu</mat-card-title>
-		<mat-card-subtitle>Dog Breed</mat-card-subtitle>
-	</mat-card-header>
-	<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-	<mat-card-content>
-		<p>
-			The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-			A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-			bred for hunting.
-		</p>
-	</mat-card-content>
-	<mat-card-actions>
-		<button mat-button>View Details</button>
-	</mat-card-actions>
-</mat-card>
 
 <div class="p10" *ngIf="isLoading" fxFlex fxLayout="column" fxLayoutAlign="center start">
 	{{ feedbackMessage || "Loading, please, wait." }}

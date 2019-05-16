@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MoviesListModule } from './movies/movies-list/movies-list.module';
 import { MoviesViewModule } from './movies/movies-view/movies-view.module';
 import { ConfigurationService } from './services/configuration.service';
+import { PipesModule } from './common/pipes/pipes.module';
 
 @NgModule({
 	declarations: [
@@ -51,7 +52,8 @@ import { ConfigurationService } from './services/configuration.service';
 		MatTabsModule,
 		MoviesListModule,
 		MoviesViewModule,
-		HttpClientModule
+		HttpClientModule,
+		PipesModule
 	],
 	providers: [
 		ConfigurationService,

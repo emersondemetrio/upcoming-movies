@@ -40,6 +40,10 @@
 	height: 100vh;
 }
 
+#main-toolbar {
+	min-height: 70px;
+}
+
 mat-sidenav-container {
 	height: 100%;
 }
@@ -97,12 +101,6 @@ mat-sidenav-container {
 	text-align: center !important;
 }
 
-#gsc-sidenav {
-	width: 200px;
-	padding: 20px;
-	text-align: left;
-}
-
 ::ng-deep .overflow-scroll {
 	overflow: scroll !important;
 }
@@ -133,6 +131,11 @@ mat-sidenav-container {
 }
 
 ::ng-deep .header-container {
-	height: 100px !important;
-	min-height: 100px !important;
+	height: 40px !important;
+	min-height: 40px !important;
+}
+
+::ng-deep .header-container h2 {
+	border: 0;
+	padding: 0;
 }

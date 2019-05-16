@@ -14,8 +14,8 @@ export class MoviesService {
 		this.apiUrl = environment.apiUrl;
 	}
 
-	public list(): Observable<Movie[]> {
-		return this.http.get<Movie[]>(`${this.apiUrl}movies/upcoming`);
+	public list(): Observable<PagedResponse> {
+		return this.http.get<PagedResponse>(`${this.apiUrl}movies/upcoming`);
 	}
 
 	public get(movieId: string): Observable<Movie> {

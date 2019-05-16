@@ -1,4 +1,13 @@
-ul {
-	list-style: none;
-	padding-left: 0;
+mat-card-header * {
+	font-size: 18px !important;
+	text-align: center;
+}
+
+mat-card-title {
+	min-height: 50px;
+}
+
+mat-card-content {
+	min-height: 50px;
+	max-height: 50px;
 }
