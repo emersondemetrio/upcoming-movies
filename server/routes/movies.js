@@ -15,9 +15,9 @@ router.get('/configuration', async (_req, res) => {
 });
 
 // List all Upcoming Movies
-router.get('/upcoming', async (_req, res) => {
+router.get('/upcoming/:page?', async (req, res) => {
 	try {
-		const list = await api.getUpcoming();
+		const list = await api.getUpcoming(req.params.page);
 		res.json(list);
 	} catch (error) {
 		console.log(error)

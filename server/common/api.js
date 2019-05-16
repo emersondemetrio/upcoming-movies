@@ -5,24 +5,26 @@ const setup = {
 	apiKey: process.env.tmdbApiKey
 };
 
-const getRequest = (method, endPoint) => {
-	endPoint = `${setup.apiUrl}/${endPoint}`
-	const req = unirest(method, endPoint)
+const getRequest = (method, endPoint, reqOnly = false) => {
+	endPoint = `${setup.apiUrl}/${endPoint}`;
+	const req = unirest(method, endPoint);
+
+	if(reqOnly) {
+		return req;
+	}
 
 	req.query({
-		'page': '1',
 		'language': 'en-US',
 		'api_key': setup.apiKey
 	});
 
-	return req;
+	return req.send('{}');
 };
 
 const getConfiguration = () => new Promise((resolve, reject) => {
-	const req = getRequest('GET', 'configuration').send('{}');
-console.log(req)
+	const req = getRequest('GET', 'configuration');
+
 	req.end(res => {
-		console.log(res)
 		if (res.error) {
 			reject(res.error);
 		}
@@ -31,15 +33,22 @@ console.log(req)
 	});
 });
 
-const getUpcoming = () => new Promise((resolve, reject) => {
-	const req = getRequest('GET', 'movie/upcoming').send('{}');
+const getUpcoming = (page = 1) => new Promise((resolve, reject) => {
+	const req = getRequest('GET', 'movie/upcoming', true);
 
-	req.end(function (res) {
+	req.query({
+		'page': page,
+		'language': 'en-US',
+		'api_key': setup.apiKey
+	});
+
+	req.send('{}');
+	req.end(res => {
 		if (res.error) {
 			reject(res.error);
 		}
 
-		resolve(res.body.results);
+		resolve(res.body);
 	});
 });
 
