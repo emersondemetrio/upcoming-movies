@@ -1,0 +1,17 @@
+<div *ngIf="!isLoading" class="container" fxLayout="column" fxLayoutAlign="space-between strech">
+
+	<div fxFlexFill fxLayout="row" class="header-container" fxLayoutAlign="space-between center">
+		<h2>movie</h2>
+	</div>
+	<div>
+
+		<div id="actions" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+			<button type="button" (click)="goBack()" mat-button color="warn">Cancel</button>
+			<button type="submit" mat-raised-button [disabled]="movie.sizes.length === 0" color="primary">Save</button>
+		</div>
+	</div>
+</div>
+
+<div class="p10" *ngIf="isLoading" fxFlex fxLayout="column" fxLayoutAlign="center center">
+	{{ feedbackMessage }}
+</div>

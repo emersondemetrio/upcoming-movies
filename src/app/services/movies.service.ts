@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { Observable, of } from 'rxjs';
-
-const MOVIES = [
-	{ name: 'Avengers' },
-	{ name: 'Snow Flake' },
-	{ name: 'Free Willy' }
-];
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class MoviesService {
@@ -21,7 +15,7 @@ export class MoviesService {
 	}
 
 	public list(): Observable<Movie[]> {
-		return this.http.get<Movie[]>(`${this.apiUrl}upcoming`);
+		return this.http.get<Movie[]>(`${this.apiUrl}movies/upcoming`);
 	}
 
 	public get(movieId: string): Observable<Movie> {

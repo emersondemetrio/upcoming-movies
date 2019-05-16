@@ -25,6 +25,8 @@ import {
 import { MoviesService } from './services/movies.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesListModule } from './movies/movies-list/movies-list.module';
+import { MoviesViewModule } from './movies/movies-view/movies-view.module';
+import { ConfigurationService } from './services/configuration.service';
 
 @NgModule({
 	declarations: [
@@ -48,9 +50,11 @@ import { MoviesListModule } from './movies/movies-list/movies-list.module';
 		MatSnackBarModule,
 		MatTabsModule,
 		MoviesListModule,
+		MoviesViewModule,
 		HttpClientModule
 	],
 	providers: [
+		ConfigurationService,
 		MoviesService
 	],
 	bootstrap: [AppComponent]
