@@ -11,3 +11,7 @@ mat-card-content {
 	min-height: 50px;
 	max-height: 50px;
 }
+
+.hide-all {
+	display: none !important;
+}

@@ -13,7 +13,9 @@ import {
 	MatToolbarModule,
 	MatTooltipModule,
 	MatMenuModule,
-	MatSnackBarModule
+	MatSnackBarModule,
+	MatPaginatorModule,
+	MatProgressBarModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { PipesModule } from 'src/app/common/pipes/pipes.module';
@@ -34,7 +36,9 @@ import { PipesModule } from 'src/app/common/pipes/pipes.module';
 		FlexLayoutModule,
 		RouterModule,
 		MatSnackBarModule,
-		PipesModule
+		PipesModule,
+		MatPaginatorModule,
+		MatProgressBarModule
 	],
 	exports: [
 		MoviesListComponent

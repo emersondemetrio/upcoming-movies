@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from 'src/app/services/movies.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, PageEvent } from '@angular/material';
 import { Router } from '@angular/router';
 import { Utils } from 'src/app/common/utils';
 
@@ -11,9 +11,12 @@ import { Utils } from 'src/app/common/utils';
 })
 export class MoviesListComponent implements OnInit {
 
-	public isLoading = false;
+	public isLoading = true;
 	public feedbackMessage = '';
 	public pageInfo: PagedResponse = null;
+	public length = null;
+	public pageSize = null;
+	public hasError = false;
 
 	constructor(
 		private movieService: MoviesService,
@@ -21,26 +24,36 @@ export class MoviesListComponent implements OnInit {
 		private snackBar: MatSnackBar) {
 	}
 
-	public getmovies() {
+	ngOnInit() {
+		this.getmovies(1, true);
+	}
+
+	public pageChanged(event: PageEvent) {
+		this.getmovies(event.pageIndex);
+	}
+
+	public getmovies(page: number, isFirst: boolean = false) {
 		this.isLoading = true;
 		this
 			.movieService
-			.list()
+			.list(page)
 			.subscribe(resp => {
 				this.pageInfo = {
 					...resp,
 					results: Utils.mapImages(resp.results),
 				};
 
+				if (isFirst) {
+					this.length = resp.total_results;
+					this.pageSize = resp.results.length;
+				}
+
 				this.isLoading = false;
 			}, () => {
 				this.notify('An error has occurred. Please, try again later', 0);
 				this.isLoading = true;
+				this.hasError = true;
 			});
-	}
-
-	ngOnInit() {
-		this.getmovies();
 	}
 
 	public navigate(params: string[]) {
@@ -52,6 +65,7 @@ export class MoviesListComponent implements OnInit {
 			verticalPosition: 'top',
 			duration
 		});
+
 		this.feedbackMessage = message;
 	}
 }
