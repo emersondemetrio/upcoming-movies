@@ -1,13 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const api = require('./api');
+const api = require('../common/api');
+
+// GET api configuration
+router.get('/configuration', async (_req, res) => {
+	try {
+		const setup = await api.getConfiguration();
+		res.json(setup);
+	} catch (error) {
+		res.json({
+			error
+		});
+	}
+});
 
 // List all Upcoming Movies
 router.get('/upcoming', async (_req, res) => {
 	try {
-		const list = await api.upcoming();
+		const list = await api.getUpcoming();
 		res.json(list);
 	} catch (error) {
+		console.log(error)
 		res.json({
 			error
 		});
