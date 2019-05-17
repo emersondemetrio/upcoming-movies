@@ -1,10 +1,11 @@
 {
 	"name": "upcoming-movies",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"scripts": {
 		"ng": "ng",
 		"server": "node ./server/server.js",
-		"start": "ng serve",
+		"start-local": "ng serve",
+		"start": "node ./server/server.js",
 		"build": "ng build",
 		"test": "ng test",
 		"lint": "ng lint",
@@ -35,7 +36,8 @@
 		"rxjs": "~6.3.3",
 		"tslib": "^1.9.0",
 		"unirest": "^0.6.0",
-		"zone.js": "~0.8.26"
+		"zone.js": "~0.8.26",
+		"typescript": "~3.2.2"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^0.13.9",
