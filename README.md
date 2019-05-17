@@ -1,27 +1,37 @@
 # Upcoming Movies Web App
 
-## Basic Setup
+## Architecture
 
-Run
+Basically, Javascript/Typescript: Front and Back End, using:
 
-- npm install # install dependencies
+Front-end
+
+- [Angular 7+ Framework for routing, components and layout](https://angular.io/)
+- [Material 2 For UI and Icons](https://material.angular.io)
+- [Angular Flex Layout as FlexLayout/CSS framework](https://github.com/angular/flex-layout)
+
+Back-end
+
+- nodejs
+- [express - Routing and middlewares](https://expressjs.com/)
+- [cors - Enable cors](https://github.com/expressjs/cors)
+- [Body Parser - Request body conversion](https://www.npmjs.com/package/body-parser)
+- [unirest - Easy HTTP Requests](http://unirest.io/)
+
+The following app are using the listed libraries and frameworks to show the results coming from TMDB API.
+
+The requests to the TMDB API are made by unirest, through the server that I've created (see ./server folder).
+
+Deployed Version: [https://upcoming-employee.herokuapp.com/movies](https://upcoming-employee.herokuapp.com/movies)
+
+## Build Instructions
+
+- npm install # install dependencies and build
 - npm start # run the project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Doc
-
-- Based on Angular 7+ Framework
-- Using Material 2 as UI Interface
-- Using Angular Flex Layout as CSS framework
-
 ## Assumptions
-- None yet
+
+- You'll have the `tmdbApiKey` var on your ENV setup
+- (For build only) You have nodejs on your machine
+
+Cheers!

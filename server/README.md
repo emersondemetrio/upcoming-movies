@@ -10,16 +10,14 @@
 Based on
 
 - nodejs
-- [express (routing and middlewares)](https://expressjs.com/)
-- [nano (couchDB client)](https://www.npmjs.com/package/nano)
-- [moment(date lib)](https://momentjs.com/)
-- [cors (enable cors)](https://github.com/expressjs/cors)
-- [Body Parser (easy request body conversion)](https://www.npmjs.com/package/body-parser)
-
+- [express - Routing and middlewares](https://expressjs.com/)
+- [cors - Enable cors](https://github.com/expressjs/cors)
+- [Body Parser - Request body conversion](https://www.npmjs.com/package/body-parser)
+- [unirest - Easy HTTP Requests](http://unirest.io/)
 
 ## Assumptions
 
-- None yet
+- You'll have the `tmdbApiKey` var on your ENV setup
 
 ## Author
 

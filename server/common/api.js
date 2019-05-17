@@ -1,4 +1,4 @@
-const unirest = require("unirest");
+const unirest = require('unirest');
 
 const setup = {
 	apiUrl: 'https://api.themoviedb.org/3',

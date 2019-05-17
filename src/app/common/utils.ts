@@ -25,7 +25,7 @@ export class Utils {
 	public static mapImage(movie: Movie, setup: ApiConfiguration = null): Movie {
 		setup = setup === null ? Utils.getApiSetup() : setup;
 
-		if(!setup.error) {
+		if(!setup.error && setup !== null) {
 			const posterSize = setup.images.poster_sizes
 				.find(imageSize => imageSize === 'w500') ? 'w500' : 'original';
 
