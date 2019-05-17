@@ -15,3 +15,39 @@ mat-card-content {
 .hide-all {
 	display: none !important;
 }
+
+.movie-card {
+	width: 270px;
+	margin-bottom: 20px;
+}
+
+img {
+	cursor: pointer;
+	max-height: 400px;
+}
+
+.release-info {
+	font-size: 12px;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	margin: 0;
+	background: rgba(138, 113, 113, 0.52);
+	left: 0;
+	padding: 10px 0;
+	color: #fff;
+	top: 400px;
+	font-weight: bold;
+}
+
+img:hover + .release-info {
+	background: rgba(138, 113, 113, 1);
+}
+
+mat-card-actions {
+	border-top: solid 1px #ddd;
+}
+
+.movies-container {
+	margin-top: -40px !important;
+}

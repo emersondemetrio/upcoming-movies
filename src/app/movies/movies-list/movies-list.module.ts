@@ -19,6 +19,7 @@ import {
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { PipesModule } from 'src/app/common/pipes/pipes.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	imports: [
@@ -38,7 +39,8 @@ import { PipesModule } from 'src/app/common/pipes/pipes.module';
 		MatSnackBarModule,
 		PipesModule,
 		MatPaginatorModule,
-		MatProgressBarModule
+		MatProgressBarModule,
+		FormsModule
 	],
 	exports: [
 		MoviesListComponent

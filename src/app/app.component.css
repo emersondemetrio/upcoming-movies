@@ -84,6 +84,10 @@ mat-sidenav-container {
 	padding: 10px;
 }
 
+::ng-deep .p20 {
+	padding: 20px;
+}
+
 ::ng-deep .mgr-5i {
 	margin-right: 5px !important;
 }
@@ -127,10 +131,12 @@ mat-sidenav-container {
 }
 
 ::ng-deep .container {
+	margin-top: 10px;
 	padding: 0 10px !important;
 }
 
 ::ng-deep .header-container {
+	margin-top: 10px;
 	height: 40px !important;
 	min-height: 40px !important;
 }
@@ -138,4 +144,5 @@ mat-sidenav-container {
 ::ng-deep .header-container h2 {
 	border: 0;
 	padding: 0;
+	font-weight: 100;
 }

@@ -22,9 +22,8 @@ export class MoviesService {
 		return this.http.get<Movie>(`${this.apiUrl}movies/get/${movieId}`);
 	}
 
-	public search(movieName: string): Observable<Movie[]> {
-		return this.http.post<Movie[]>(`${this.apiUrl}movies/search`, {
-			movieName
-		});
+	public search(movieName: string): Observable<PagedResponse> {
+		const url = `${this.apiUrl}movies/search/${encodeURIComponent(movieName)}`;
+		return this.http.get<PagedResponse>(url);
 	}
 }

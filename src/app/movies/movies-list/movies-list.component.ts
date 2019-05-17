@@ -17,6 +17,9 @@ export class MoviesListComponent implements OnInit {
 	public length = null;
 	public pageSize = null;
 	public hasError = false;
+	public search: string = '';
+	public searchHasResults = false;
+	public resultsFor: string = '';
 
 	constructor(
 		private movieService: MoviesService,
@@ -25,14 +28,43 @@ export class MoviesListComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.getmovies(1, true);
+		this.getMovies(1, true);
 	}
 
 	public pageChanged(event: PageEvent) {
-		this.getmovies(event.pageIndex);
+		this.getMovies(event.pageIndex + 1);
 	}
 
-	public getmovies(page: number, isFirst: boolean = false) {
+	public resetSearch() {
+		this.search = '';
+		this.searchHasResults = false;
+		this.getMovies(1);
+	}
+
+	public searchMovies() {
+		this.isLoading = true;
+		this
+			.movieService
+			.search(this.search)
+			.subscribe(resp => {
+				this.pageInfo = {
+					...resp,
+					results: Utils.mapImages(resp.results),
+				};
+				this.searchHasResults = true;
+				this.resultsFor = this.search;
+				this.length = resp.total_results;
+				this.pageSize = resp.results.length;
+
+				this.isLoading = false;
+			}, () => {
+				this.notify('An error has occurred. Please, try again later', 0);
+				this.isLoading = true;
+				this.hasError = true;
+			});
+	}
+
+	public getMovies(page: number, isFirst: boolean = false) {
 		this.isLoading = true;
 		this
 			.movieService
