@@ -32,7 +32,6 @@ router.get('/search/:movie/:page?', async (req, res) => {
 		const movie = await api.searchMovies(req.params.movie, req.params.page);
 		res.json(movie);
 	} catch (error) {
-		console.group(error)
 		res.json({
 			error
 		});
@@ -45,7 +44,6 @@ router.get('/get/:id', async (req, res) => {
 		const movie = await api.getMovie(req.params.id);
 		res.json(movie);
 	} catch (error) {
-		console.group(error)
 		res.json({
 			error
 		});

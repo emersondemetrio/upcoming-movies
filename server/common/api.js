@@ -35,7 +35,6 @@ const getConfiguration = () => new Promise((resolve, reject) => {
 
 const getUpcoming = (page = 1) => new Promise((resolve, reject) => {
 	const req = getRequest('GET', 'movie/upcoming', true);
-
 	req.query({
 		'page': page,
 		'language': 'en-US',
@@ -64,12 +63,12 @@ const getMovie = (id) => new Promise((resolve, reject) => {
 	});
 });
 
-const searchMovies = (encodedSearchString, page = 1) => new Promise((resolve, reject) => {
+const searchMovies = (encSearch, page = 1) => new Promise((resolve, reject) => {
 	const req = getRequest('GET', `search/movie`, true);
 
 	req.query({
 		'page': page,
-		'query': encodedSearchString,
+		'query': encSearch,
 		'language': 'en-US',
 		'include_adult': false,
 		'api_key': setup.apiKey
@@ -77,7 +76,6 @@ const searchMovies = (encodedSearchString, page = 1) => new Promise((resolve, re
 
 	req.send('{}');
 	req.end(res => {
-		console.log(res)
 		if (res.error) {
 			reject(res.error);
 		}
