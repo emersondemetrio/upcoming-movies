@@ -10,13 +10,15 @@ import { Utils } from 'src/app/common/utils';
 	styleUrls: ['./movies-list.component.css']
 })
 export class MoviesListComponent implements OnInit {
-
+	public hasError = false;
 	public isLoading = true;
 	public feedbackMessage = '';
+
 	public pageInfo: PagedResponse = null;
 	public length = null;
 	public pageSize = null;
-	public hasError = false;
+
+
 	public search: string = '';
 	public searchHasResults = false;
 	public resultsFor: string = '';
@@ -28,71 +30,75 @@ export class MoviesListComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.getMovies(1, true);
+		this.getMovies();
 	}
 
-	public pageChanged(event: PageEvent) {
+	public defaultError(): void {
+		this.notify('An error has occurred. Please, try again later', 0);
+		this.isLoading = true;
+		this.hasError = true;
+	}
+
+	public pageChanged(event: PageEvent): void {
 		this.getMovies(event.pageIndex + 1);
 	}
 
-	public resetSearch() {
+	public resetSearch(): void {
 		this.search = '';
 		this.searchHasResults = false;
-		this.getMovies(1);
+		this.getMovies();
 	}
 
-	public searchMovies() {
+	public searchMovies(): void {
 		this.isLoading = true;
 		this
 			.movieService
 			.search(this.search)
 			.subscribe(resp => {
-				this.pageInfo = {
-					...resp,
-					results: Utils.mapImages(resp.results),
-				};
-				this.searchHasResults = true;
-				this.resultsFor = this.search;
-				this.length = resp.total_results;
-				this.pageSize = resp.results.length;
+				if (resp.error) {
+					this.defaultError();
+				} else {
+					this.pageInfo = {
+						...resp,
+						results: Utils.mapImages(resp.results),
+					};
 
-				this.isLoading = false;
-			}, () => {
-				this.notify('An error has occurred. Please, try again later', 0);
-				this.isLoading = true;
-				this.hasError = true;
-			});
+					this.searchHasResults = true;
+					this.resultsFor = this.search;
+					this.length = resp.total_results;
+					this.pageSize = resp.results.length;
+
+					this.isLoading = false;
+				}
+			}, () => this.defaultError());
 	}
 
-	public getMovies(page: number, isFirst: boolean = false) {
+	public getMovies(page: number = 1): void {
 		this.isLoading = true;
 		this
 			.movieService
 			.list(page)
 			.subscribe(resp => {
-				this.pageInfo = {
-					...resp,
-					results: Utils.mapImages(resp.results),
-				};
+				if (resp.error) {
+					this.defaultError();
+				} else {
+					this.pageInfo = {
+						...resp,
+						results: Utils.mapImages(resp.results),
+					};
 
-				if (isFirst) {
 					this.length = resp.total_results;
 					this.pageSize = resp.results.length;
+					this.isLoading = false;
 				}
-
-				this.isLoading = false;
-			}, () => {
-				this.notify('An error has occurred. Please, try again later', 0);
-				this.isLoading = true;
-				this.hasError = true;
-			});
+			}, () => this.defaultError());
 	}
 
-	public navigate(params: string[]) {
+	public navigate(params: string[]): void {
 		this.router.navigate(params);
 	}
 
-	private notify(message: string, duration = 3000) {
+	private notify(message: string, duration = 3000): void {
 		this.snackBar.open(message, '', {
 			verticalPosition: 'top',
 			duration

@@ -11,22 +11,21 @@ import {
 	MatToolbarModule,
 	MatIconModule,
 	MatButtonModule,
-	MatMenuModule,
 	MatCardModule,
-	MatSidenavModule,
 	MatFormFieldModule,
 	MatInputModule,
-	MatSelectModule,
-	MatChipsModule,
 	MatSnackBarModule,
-	MatTabsModule,
 } from '@angular/material';
 
-import { MoviesService } from './services/movies.service';
+
 import { HttpClientModule } from '@angular/common/http';
+
+import { MoviesService } from './services/movies.service';
+import { ConfigurationService } from './services/configuration.service';
+
 import { MoviesListModule } from './movies/movies-list/movies-list.module';
 import { MoviesViewModule } from './movies/movies-view/movies-view.module';
-import { ConfigurationService } from './services/configuration.service';
+
 import { PipesModule } from './common/pipes/pipes.module';
 
 @NgModule({
@@ -41,15 +40,10 @@ import { PipesModule } from './common/pipes/pipes.module';
 		MatToolbarModule,
 		MatIconModule,
 		MatButtonModule,
-		MatMenuModule,
 		MatCardModule,
-		MatSidenavModule,
 		MatFormFieldModule,
 		MatInputModule,
-		MatSelectModule,
-		MatChipsModule,
 		MatSnackBarModule,
-		MatTabsModule,
 		MoviesListModule,
 		MoviesViewModule,
 		HttpClientModule,

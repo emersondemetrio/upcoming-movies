@@ -3,6 +3,7 @@ interface PagedResponse {
 	total_results: number;
 	total_pages: number;
 	results: Movie[];
+	error: any,
 	[key: string]: any;
 }
 

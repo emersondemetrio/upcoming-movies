@@ -12,10 +12,6 @@ mat-card-content {
 	max-height: 50px;
 }
 
-.hide-all {
-	display: none !important;
-}
-
 .movie-card {
 	width: 270px;
 	margin-bottom: 20px;

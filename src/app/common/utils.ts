@@ -19,18 +19,29 @@ export class Utils {
 
 	public static mapImages(movies: Movie[]): Movie[] {
 		const setup = Utils.getApiSetup();
+		return movies.map(movie => Utils.mapImage(movie, setup));
+	}
+
+	public static mapImage(movie: Movie, setup: ApiConfiguration = null): Movie {
+		setup = setup === null ? Utils.getApiSetup() : setup;
+
 		if(!setup.error) {
 			const posterSize = setup.images.poster_sizes
-				.find(s => s === 'w500') ? 'w500' : 'original';
-			return movies.map(movie => ({
-				cover: `${setup.images.secure_base_url}${posterSize}${movie.poster_path}`,
+				.find(imageSize => imageSize === 'w500') ? 'w500' : 'original';
+
+			const image = movie.poster_path !== null ? movie.poster_path : null;
+
+			return {
+				cover: image !== null ? (
+					`${setup.images.secure_base_url}${posterSize}${movie.poster_path}`
+				): 'assets/no-image.png',
 				...movie
-			}));
+			};
 		} else {
-			return movies.map(movie => ({
-				cover: `assets/no-image.png`,
+			return {
+				cover: 'assets/no-image.png',
 				...movie
-			}));
+			};
 		}
 	}
 }

@@ -4,36 +4,24 @@ import { MoviesViewComponent } from './movies-view.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
-	MatCardModule,
 	MatButtonModule,
 	MatIconModule,
 	MatDialogModule,
-	MatCheckboxModule,
-	MatInputModule,
-	MatTableModule,
-	MatToolbarModule,
-	MatTooltipModule,
-	MatMenuModule,
-	MatSnackBarModule
+	MatSnackBarModule,
+	MatProgressBarModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
 	imports: [
 		CommonModule,
-		MatCardModule,
 		MatButtonModule,
 		MatIconModule,
 		MatDialogModule,
-		MatCheckboxModule,
-		MatInputModule,
-		MatTableModule,
-		MatToolbarModule,
-		MatTooltipModule,
-		MatMenuModule,
 		FlexLayoutModule,
 		RouterModule,
-		MatSnackBarModule
+		MatSnackBarModule,
+		MatProgressBarModule
 	],
 	exports: [
 		MoviesViewComponent

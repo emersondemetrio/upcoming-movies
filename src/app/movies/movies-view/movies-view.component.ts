@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { MoviesService } from 'src/app/services/movies.service';
+import { Utils } from 'src/app/common/utils';
 
 @Component({
 	selector: 'app-movies-view',
@@ -14,6 +15,7 @@ export class MoviesViewComponent implements OnInit {
 
 	public movieId: string = null;
 	public isLoading = false;
+	public hasError = false;
 	public feedbackMessage = '';
 
 	constructor(
@@ -30,21 +32,28 @@ export class MoviesViewComponent implements OnInit {
 			this
 				.moviesService
 				.get(this.movieId)
-				.subscribe(movie => {
-					this.movie = movie;
-					this.isLoading = false;
-				}, () => {
-					this.notify('An error has occurred. Please, try again later', 0);
-					this.isLoading = true;
-				});
+				.subscribe(resp => {
+					if (resp.error) {
+						this.defaultError();
+					} else {
+						this.movie = Utils.mapImage(resp);
+						this.isLoading = false;
+					}
+				}, () => this.defaultError());
 		}
 	}
 
-	public goBack() {
+	public defaultError(): void {
+		this.notify('An error has occurred. Please, try again later', 0);
+		this.isLoading = true;
+		this.hasError = true;
+	}
+
+	public goBack(): void {
 		this.router.navigate(['/']);
 	}
 
-	private notify(message: string, duration = 3000) {
+	private notify(message: string, duration = 3000): void {
 		this.snackBar.open(message, '', {
 			verticalPosition: 'top',
 			duration
