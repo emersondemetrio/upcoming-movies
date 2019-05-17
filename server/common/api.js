@@ -52,7 +52,44 @@ const getUpcoming = (page = 1) => new Promise((resolve, reject) => {
 	});
 });
 
+const getMovie = (id) => new Promise((resolve, reject) => {
+	const req = getRequest('GET', `movie/${id}`);
+
+	req.end(res => {
+		if (res.error) {
+			reject(res.error);
+		}
+
+		resolve(res.body);
+	});
+});
+
+const searchMovies = (encodedSearchString, page = 1) => new Promise((resolve, reject) => {
+	const req = getRequest('GET', `search/movie`, true);
+
+	req.query({
+		'page': page,
+		'query': encodedSearchString,
+		'language': 'en-US',
+		'include_adult': false,
+		'api_key': setup.apiKey
+	});
+
+	req.send('{}');
+	req.end(res => {
+		console.log(res)
+		if (res.error) {
+			reject(res.error);
+		}
+
+		resolve(res.body);
+	});
+});
+
+
 module.exports = {
 	getConfiguration,
-	getUpcoming
+	getUpcoming,
+	getMovie,
+	searchMovies
 };
