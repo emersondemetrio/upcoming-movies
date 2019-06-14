@@ -25,67 +25,29 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
-.menu-label {
-	font-size: 16px;
-	cursor: pointer;
-	margin-right: 10px;
-}
-
-.logo {
-	width: 130px;
-	min-height: 55px;
-}
-
 #main-app {
 	height: 100vh;
 }
 
-mat-sidenav-container {
-	height: 100%;
+#main-toolbar {
+	min-height: 70px;
 }
 
 #app-container {
 	margin-top: 30px !important;
 }
 
-::ng-deep .pr-10 {
-	padding-right: 10px;
-}
-
-::ng-deep .mgb-10 {
-	margin-bottom: 10px;
-}
-
-::ng-deep .mgb-30 {
-	margin-bottom: 30px !important;
-}
-
-::ng-deep .min-height-30 {
-	min-height: 30px !important;
-}
-
-::ng-deep .mgt-10 {
-	margin-top: 10px;
+::ng-deep .mat-toolbar span {
+	cursor: pointer;
+	outline: none;
 }
 
 ::ng-deep .mgl-5 {
 	margin-left: 5px;
 }
 
-::ng-deep .mgr-5 {
-	margin-right: 5px;
-}
-
-::ng-deep .p10 {
-	padding: 10px;
-}
-
-::ng-deep .mgr-5i {
-	margin-right: 5px !important;
-}
-
-::ng-deep table {
-	width: 100% !important;
+::ng-deep .p20 {
+	padding: 20px;
 }
 
 ::ng-deep mat-header-cell {
@@ -95,12 +57,6 @@ mat-sidenav-container {
 
 ::ng-deep .mat-simple-snackbar {
 	text-align: center !important;
-}
-
-#gsc-sidenav {
-	width: 200px;
-	padding: 20px;
-	text-align: left;
 }
 
 ::ng-deep .overflow-scroll {
@@ -121,7 +77,7 @@ mat-sidenav-container {
 }
 
 ::ng-deep .loading-error {
-	border: solid 1px #e0c8c8;
+	color: rgba(255, 0, 0, 0.79);
 	padding: 10px;
 	text-align: center;
 	margin: 10px;
@@ -129,10 +85,27 @@ mat-sidenav-container {
 }
 
 ::ng-deep .container {
+	margin-top: 10px;
 	padding: 0 10px !important;
+	min-height: 100vh;
 }
 
 ::ng-deep .header-container {
-	height: 100px !important;
-	min-height: 100px !important;
+	margin-top: 10px;
+	height: 40px !important;
+	min-height: 40px !important;
+}
+
+::ng-deep h4 {
+	margin: 0;
+}
+
+::ng-deep .header-container h2 {
+	border: 0;
+	padding: 0;
+	font-weight: 100;
+}
+
+::ng-deep .hide-all {
+	display: none !important;
 }

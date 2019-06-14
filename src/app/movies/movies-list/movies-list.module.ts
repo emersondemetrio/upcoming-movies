@@ -13,9 +13,13 @@ import {
 	MatToolbarModule,
 	MatTooltipModule,
 	MatMenuModule,
-	MatSnackBarModule
+	MatSnackBarModule,
+	MatPaginatorModule,
+	MatProgressBarModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { PipesModule } from 'src/app/common/pipes/pipes.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	imports: [
@@ -32,7 +36,11 @@ import { RouterModule } from '@angular/router';
 		MatMenuModule,
 		FlexLayoutModule,
 		RouterModule,
-		MatSnackBarModule
+		MatSnackBarModule,
+		PipesModule,
+		MatPaginatorModule,
+		MatProgressBarModule,
+		FormsModule
 	],
 	exports: [
 		MoviesListComponent

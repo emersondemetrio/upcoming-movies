@@ -1,20 +1,127 @@
 <div
-	class="container"
 	fxFlex="100"
 	fxLayout="column"
+	class="container"
 	fxFlex.lt-md="100"
-	*ngIf="!isLoading"
+	[ngClass]="{
+		'hide-all': isLoading
+	}"
 	fxLayoutAlign.lt-md="space-between center">
 
-	<div fxFlexFill fxLayout="row" class="header-container" fxLayoutAlign="space-between center">
-		<h2>Movies</h2>
+	<div
+		fxFlexFill
+		fxLayout="row"
+		class="header-container"
+		fxLayoutAlign="center center">
+		<h2 *ngIf="!searchHasResults">Upcoming Movies ({{ length }})</h2>
+		<h2 *ngIf="searchHasResults">
+			Results for '{{ resultsFor }}' ({{ length }}):
+		</h2>
 	</div>
 
-	<div fxFlexFill>
-		<pre><code>{{ movies | json }}</code></pre>
+	<form fxLayout="row" fxLayoutAlign="center center">
+		<mat-form-field  fxFlex.lt-md="100" fxFlex="40">
+			<input
+				matInput
+				name="search"
+				[(ngModel)]="search"
+				placeholder="Search Movie">
+		</mat-form-field>
+
+		<button type="submit" mat-icon-button (click)="searchMovies()">
+			<mat-icon>search</mat-icon>
+		</button>
+
+		<button
+			type="button"
+			(click)="resetSearch()"
+			mat-icon-button
+			*ngIf="searchHasResults">
+			<mat-icon>clear</mat-icon>
+		</button>
+	</form>
+
+	<div
+		fxFlexFill
+		*ngIf="!isLoading"
+		fxLayout="row wrap"
+		fxLayoutGap="10px grid"
+		class="movies-container"
+		fxLayoutAlign="space-around center">
+
+		<div
+			fxflexfill
+			fxlayoutalign="center center"
+			*ngFor="let movie of pageInfo.results">
+
+			<mat-card class="movie-card">
+				<mat-card-header fxLayoutAlign="space-around center">
+					<mat-card-title fxLayoutAlign="space-around center">
+						{{ movie.original_title }}
+					</mat-card-title>
+				</mat-card-header>
+
+				<img
+					mat-card-image
+					src="{{ movie.cover }}"
+					alt="{{ movie.original_title }}"
+					title="{{ movie.tagline }}"
+					(click)="navigate(['movies', movie.id])">
+
+				<div class="release-info">
+					Release Date: {{ movie.release_date }}
+					<br>
+					Average Grade: {{ movie.vote_average }}
+				</div>
+
+				<mat-card-content>
+					<p>
+						{{ movie.overview | excerpt:65 }}
+					</p>
+				</mat-card-content>
+
+				<mat-card-actions fxLayoutAlign="space-around center">
+					<button
+						mat-button
+						color="primary"
+						(click)="navigate(['movies', movie.id])">
+						View Details
+					</button>
+				</mat-card-actions>
+			</mat-card>
+		</div>
+	</div>
+
+	<div
+		fxLayout="row"
+		fxLayoutGap="10px"
+		[hidden]="isLoading"
+		fxLayoutAlign="center center" >
+		<mat-paginator
+			#paginator
+			[length]="length"
+			[pageSize]="pageSize"
+			(page)="pageChanged($event)">
+		</mat-paginator>
 	</div>
 </div>
 
-<div class="p10" *ngIf="isLoading" fxFlex fxLayout="column" fxLayoutAlign="center start">
+<div
+	fxFlex
+	class="p20"
+	*ngIf="isLoading"
+	fxLayout="column"
+	[ngClass]="{
+		'loading-error': hasError
+	}"
+	fxLayoutAlign="center center">
+
 	{{ feedbackMessage || "Loading, please, wait." }}
+
+	<div fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+		<mat-progress-bar
+			color="primary"
+			mode="indeterminate"
+			*ngIf="!hasError"></mat-progress-bar>
+	</div>
 </div>

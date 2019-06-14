@@ -1,0 +1,89 @@
+<div
+	fxFlex="100"
+	fxLayout="column"
+	class="container"
+	fxFlex.lt-md="100"
+	[ngClass]="{
+		'hide-all': isLoading
+	}"
+	fxLayoutAlign.lt-md="space-between center">
+
+	<div
+		fxFlexFill
+		*ngIf="!isLoading"
+		class="movie-container"
+		fxLayout="column"
+		fxLayoutAlign="space-between stretch">
+
+		<div class="header" fxLayout="column" fxLayoutAlign="center center">
+			<h2>
+				{{ movie.original_title }}
+			</h2>
+
+			<h4>{{ movie.tagline }}</h4>
+		</div>
+
+		<div fxLayout="row" fxLayoutAlign="center stretch">
+			<img
+				src="{{ movie.cover }}"
+				alt="{{ movie.original_title }}">
+
+			<div>
+				<p class="info">
+					<strong>Overview</strong>
+				</p>
+				<p>{{ movie.overview }}</p>
+				<p>Release Date: {{ movie.release_date }}</p>
+				<p>Average Grade: {{ movie.vote_average }}</p>
+				<p>
+					<strong>Production</strong>
+				</p>
+
+				<ul>
+					<li *ngFor="let company of movie.production_companies">
+						{{ company.name }}
+					</li>
+				</ul>
+
+				<p>
+					<strong>Countries</strong>
+				</p>
+
+				<ul>
+					<li *ngFor="let country of movie.production_countries">
+						{{ country.name }}
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="actions" fxLayout="row" fxLayoutAlign="center stretch">
+			<button
+				mat-button
+				color="primary"
+				(click)="goBack()">
+				Go Back
+			</button>
+		</div>
+	</div>
+</div>
+
+<div
+	fxFlex
+	class="p20"
+	*ngIf="isLoading"
+	fxLayout="column"
+	[ngClass]="{
+		'loading-error': hasError
+	}"
+	fxLayoutAlign="center center">
+
+	{{ feedbackMessage || "Loading, please, wait." }}
+
+	<div fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+		<mat-progress-bar
+			color="primary"
+			mode="indeterminate"
+			*ngIf="!hasError"></mat-progress-bar>
+	</div>
+</div>

@@ -1,14 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { environment } from 'src/environments/environment.prod';
-import { Observable, of } from 'rxjs';
-
-const MOVIES = [
-	{ name: 'Avengers' },
-	{ name: 'Snow Flake' },
-	{ name: 'Free Willy' }
-];
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class MoviesService {
@@ -20,18 +14,16 @@ export class MoviesService {
 		this.apiUrl = environment.apiUrl;
 	}
 
-	public list(): Observable<Movie[]> {
-		// return this.http.get<Movie[]>(`${this.apiUrl}movies/list`);
-		return of(MOVIES);
+	public list(page: number): Observable<PagedResponse> {
+		return this.http.get<PagedResponse>(`${this.apiUrl}movies/upcoming/${page}`);
 	}
 
 	public get(movieId: string): Observable<Movie> {
 		return this.http.get<Movie>(`${this.apiUrl}movies/get/${movieId}`);
 	}
 
-	public search(movieName: string): Observable<Movie[]> {
-		return this.http.post<Movie[]>(`${this.apiUrl}movies/search`, {
-			movieName
-		});
+	public search(movieName: string): Observable<PagedResponse> {
+		const url = `${this.apiUrl}movies/search/${encodeURIComponent(movieName)}`;
+		return this.http.get<PagedResponse>(url);
 	}
 }
